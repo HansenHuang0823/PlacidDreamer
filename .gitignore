@@ -2,6 +2,5 @@ Balanced_Score_Distillation/final
 __pycache__
 mesh
 multiview_images
-Latent_Plane/checkpoints
 lora_checkpoints
 output

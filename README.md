@@ -7,11 +7,6 @@ cd Balanced_Score_Distillation
 sh run.sh
 ```
 
-### Pretrained Weights
-Our pretrained weights can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1T4MJisgfnPx8FR9Wd61ayM6YWJpqzpDK?usp=sharing).
-
-Put them at `Latent_Plane/checkpoints/coarse_21500.pt` and `Latent_Plane/checkpoints/fine_8100.pt`.
-
 ### Inference
 ```bash
 ### Image to multi-view images + mesh reconstruction
