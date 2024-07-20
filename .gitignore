@@ -3,3 +3,6 @@ __pycache__
 mesh
 multiview_images
 Latent_Plane/checkpoints
+lora_checkpoints
+output
+submodules

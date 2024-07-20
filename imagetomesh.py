@@ -124,9 +124,9 @@ if __name__ == "__main__":
     for j in range(len(images)):
         os.makedirs(os.path.join(args.out_image_path, filename), exist_ok=True)
         images[j].save(os.path.join(args.out_image_path, filename, "{}.png".format(j)))
-        mask_predictor = BackgroundRemoval()
-        image_rgba = mask_predictor(images[j])
-        image_rgba.save(os.path.join(args.out_image_path, filename, "{}_rgba.png".format(j)))
+        # mask_predictor = BackgroundRemoval()
+        # image_rgba = mask_predictor(images[j])
+        # image_rgba.save(os.path.join(args.out_image_path, filename, "{}_rgba.png".format(j)))
     
     os.makedirs(args.out_mesh_path, exist_ok=True)
     mesh.export("{}/{}.obj".format(args.out_mesh_path, filename), "obj")

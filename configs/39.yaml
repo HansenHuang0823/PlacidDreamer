@@ -1,0 +1,83 @@
+GenerateCamParams:
+  default_fovy: 0.55
+  default_radius: 3.5
+  fovy_range:
+  - 0.32
+  - 0.6
+  init_mesh: ./T3Bench_multiview/39/mesh.obj
+  init_num_pts: 100000
+  init_prompt: An antique glass perfume bottle
+  init_shape: latent_plane
+  max_fovy_range:
+  - 0.16
+  - 0.6
+  max_phi_range:
+  - -180
+  - 180
+  max_radius_range:
+  - 3.5
+  - 5.0
+  max_theta_range:
+  - 45
+  - 105
+  phi_range:
+  - -180
+  - 180
+  radius_range:
+  - 5.2
+  - 5.5
+  rand_cam_gamma: 1.0
+  theta_range:
+  - 45
+  - 105
+  use_pointe_rgb: false
+GuidanceParams:
+  C_batch_size: 4
+  annealing_intervals: true
+  ddim_inv: true
+  delta_t: 80
+  delta_t_start: 100
+  denoise_guidance_scale: 1.0
+  guidance_scale: 7.5
+  inverse_text: ''
+  lambda_guidance: 0.1
+  max_t_range: 0.98
+  model_key: ../../stable-diffusion-2-1-base
+  negative: unrealistic, blurry, low quality.
+  noise_seed: 0
+  perpneg: false
+  t_range:
+  - 0.02
+  - 0.5
+  text: An antique glass perfume bottle
+  xs_delta_t: 200
+  xs_eta: 0.0
+  xs_inv_steps: 5
+ModelParams:
+  bg_aug_ratio: 0.66
+  sh_degree: 0
+  workspace: '39'
+OptimizationParams:
+  as_latent_ratio: 0.2
+  densify_from_iter: 100
+  densify_grad_threshold: 0.00075
+  densify_until_iter: 3000
+  fovy_scale_up_factor:
+  - 0.75
+  - 1.1
+  geo_iter: 0
+  iterations: 5000
+  opacity_reset_interval: 300
+  percent_dense: 0.003
+  phi_scale_up_factor: 1.5
+  pro_frames_num: 600
+  pro_render_45: false
+  progressive_view_iter: 500
+  save_process: true
+  scale_up_cameras_iter: 500
+  warmup_iter: 1500
+PipelineParams:
+  convert_SHs_python: false
+port: 2355
+save_video: true
+seed: 0
