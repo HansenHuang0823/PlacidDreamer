@@ -409,13 +409,14 @@ class LatentPlane_Coarse(nn.Module):
             # pts_features = pts_features.reshape(batch_size_3D, batch_size_2D, H * W * self.n_samples, self.embed_num + 1, self.feature_dim)
             pts_features = self.transformer_layer_norm(pts_features)
             block_features_list = []
-            for block in range((pts_features.shape[0] - 1) // 32768 + 1):
-                if not block == ((pts_features.shape[0] - 1) // 32768):
+            block_size = 16384
+            for block in range((pts_features.shape[0] - 1) // block_size + 1):
+                if not block == ((pts_features.shape[0] - 1) // block_size):
                     # print(1)
-                    block_features = self.transformer(pts_features[block * 32768: (block + 1) * 32768])
+                    block_features = self.transformer(pts_features[block * block_size: (block + 1) * block_size])
                 else:
                     # exit(0)
-                    block_features = self.transformer(pts_features[block * 32768:])
+                    block_features = self.transformer(pts_features[block * block_size:])
                 block_features_list.append(block_features)
             add_feature = torch.cat(block_features_list, dim=0)
                 
@@ -502,11 +503,12 @@ class LatentPlane_Coarse(nn.Module):
 
                 pts_features = self.transformer_layer_norm(pts_features)
                 block_features_list = []
-                for block in range((pts_features.shape[0] - 1) // 32768 + 1):
-                    if not block == ((pts_features.shape[0] - 1) // 32768):
-                        block_features = self.transformer(pts_features[block * 32768: (block + 1) * 32768])
+                block_size = 16384
+                for block in range((pts_features.shape[0] - 1) // block_size + 1):
+                    if not block == ((pts_features.shape[0] - 1) // block_size):
+                        block_features = self.transformer(pts_features[block * block_size: (block + 1) * block_size])
                     else:
-                        block_features = self.transformer(pts_features[block * 32768:])
+                        block_features = self.transformer(pts_features[block * block_size:])
                     block_features_list.append(block_features)
                 pts_features = torch.cat(block_features_list, dim=0)
 
@@ -914,11 +916,12 @@ class LatentPlane_Fine(nn.Module):
             pts_features = self.transformer_layer_norm(pts_features)
             # pts_features = pts_features.reshape(batch_size_3D, batch_size_2D, H * W * n_all_sample, self.embed_num + 1, self.feature_dim)
             block_features_list = []
-            for block in range((pts_features.shape[0] - 1) // 32768 + 1):
-                if not block == ((pts_features.shape[0] - 1) // 32768):
-                    block_features = self.transformer(pts_features[block * 32768: (block + 1) * 32768])
+            block_size = 4096
+            for block in range((pts_features.shape[0] - 1) // block_size + 1):
+                if not block == ((pts_features.shape[0] - 1) // block_size):
+                    block_features = self.transformer(pts_features[block * block_size: (block + 1) * block_size])
                 else:
-                    block_features = self.transformer(pts_features[block * 32768:])
+                    block_features = self.transformer(pts_features[block * block_size:])
                 block_features_list.append(block_features)
             pts_features = torch.cat(block_features_list, dim=0)[..., :latent_embed_dim]
                 
@@ -1498,6 +1501,7 @@ class Unet2DConditionModelFor3D(UNet2DConditionModel):
                 latent_plane_fine_kwargs["coarse_sigma"] = latent_plane_coarse_output["sigma"]
                 latent_plane_fine_output = latent_plane_fine(sample, emb, **latent_plane_fine_kwargs)
                 sample = latent_plane_fine_output["sample"]
+
                 # sample = latent_plane_coarse_output["sample"]
                 # latent_plane_fine_kwargs["coarse_sigma_embeddings_map"] = latent_plane_coarse_output["sigma_embeddings_map"]
                 # latent_plane_fine_kwargs["coarse_sigma_embeddings_rays"] = latent_plane_coarse_output["sigma_embeddings_rays"]
