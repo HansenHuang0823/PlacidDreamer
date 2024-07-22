@@ -42,7 +42,7 @@ GuidanceParams:
   inverse_text: ''
   lambda_guidance: 0.1
   max_t_range: 0.98
-  model_key: ../../stable-diffusion-2-1-base
+  model_key: stabilityai/stable-diffusion-2-1-base
   negative: unrealistic, blurry, low quality.
   noise_seed: 0
   perpneg: false

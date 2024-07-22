@@ -1,4 +1,4 @@
-export MODEL_NAME="../../stable-diffusion-2-1-base"
+export MODEL_NAME="stabilityai/stable-diffusion-2-1-base"
 export INSTANCE_DIR="./multiview_images/cactus"
 export OUTPUT_DIR="./lora_checkpoints/cactus"
 

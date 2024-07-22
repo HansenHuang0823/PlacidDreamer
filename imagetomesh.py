@@ -59,13 +59,13 @@ if __name__ == "__main__":
     parser.add_argument('--out_image_path', type=str, default='./multiview_images', help="path to save the output multi-view images.")
     parser.add_argument('--out_mesh_path', type=str, default='./mesh', help="path to save the output reconstruction mesh.")
     args = parser.parse_args()
-    unet = Unet2DConditionModelFor3D.from_pretrained("../../zero123-xl-diffusers", subfolder="unet", torch_dtype=torch.float16)
+    unet = Unet2DConditionModelFor3D.from_pretrained("ashawkey/zero123-xl-diffusers", subfolder="unet", torch_dtype=torch.float16)
     pipe_kwargs = {
             "safety_checker": None,
             "requires_safety_checker": False,
         }
 
-    pipeline = Zero123PipelineFor3D.from_pretrained("../../zero123-xl-diffusers", unet=unet, **pipe_kwargs, torch_dtype=torch.float16)
+    pipeline = Zero123PipelineFor3D.from_pretrained("ashawkey/zero123-xl-diffusers", unet=unet, **pipe_kwargs, torch_dtype=torch.float16)
     latent_plane_coarse = LatentPlane_Coarse(640, 1280)
     latent_plane_coarse.n_samples = 32
     latent_plane_coarse.load_state_dict(torch.load("./Latent_Plane/checkpoints/coarse_21500.pt", map_location="cpu"))
